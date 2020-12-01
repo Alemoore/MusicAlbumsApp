@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class AlbumsViewModel @ViewModelInject constructor(
         private val repository: AlbumsRepository
-        ): ViewModel() {
+) : ViewModel() {
 
     private val _albumsResponse = MutableLiveData<ITunesResponse>()
     val albumsResponse: LiveData<ITunesResponse> = _albumsResponse
@@ -22,16 +22,14 @@ class AlbumsViewModel @ViewModelInject constructor(
         getAllAlbums()
     }
 
-            private fun getAllAlbums() {
-                viewModelScope.launch {
-                    val response = repository.getAllAlbums()
-                    handleResponse(response)
-                }
-            }
+    private fun getAllAlbums() {
+        viewModelScope.launch {
+            val response = repository.getAllAlbums()
+            handleResponse(response)
+        }
+    }
 
     private fun handleResponse(response: Response<ITunesResponse>) {
-        Log.d("ViewModel", response.body()?.results?.get(0).toString())
-
         if (response.isSuccessful) {
             _albumsResponse.postValue(response.body())
         } else {

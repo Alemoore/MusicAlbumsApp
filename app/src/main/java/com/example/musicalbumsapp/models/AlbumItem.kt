@@ -1,6 +1,6 @@
 package com.example.musicalbumsapp.models
 
-data class Result(
+data class AlbumItem(
     val amgArtistId: Int,
     val artistId: Int,
     val artistName: String,

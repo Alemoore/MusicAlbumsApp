@@ -11,7 +11,7 @@ import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.ItemAlbumPreviewBinding
 import com.example.musicalbumsapp.models.AlbumItem
 
-class AlbumsAdapter: RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
+class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
 
     private var onItemClickListener: ((AlbumItem) -> Unit)? = null
 
@@ -28,18 +28,13 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
     override fun onBindViewHolder(holder: AlbumsViewHolder, position: Int) {
         val album = differ.currentList[position]
         holder.bind(album)
-        //holder.itemView.apply {
-        //    Glide.with(this)
-        //            .load(album.artworkUrl60)
-        //            .into()
-//
-        //    setOnClickListener {
-        //        onItemClickListener?.let {
-        //            it(album)
-        //        }
-        //    }
-        //}
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(album)
+            }
+        }
     }
+
 
     override fun getItemCount(): Int = differ.currentList.size
 
@@ -55,7 +50,7 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    inner class AlbumsViewHolder(val binding: ItemAlbumPreviewBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class AlbumsViewHolder(private val binding: ItemAlbumPreviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(album: AlbumItem) {
             Glide.with(binding.root)
                     .load(album.artworkUrl100)

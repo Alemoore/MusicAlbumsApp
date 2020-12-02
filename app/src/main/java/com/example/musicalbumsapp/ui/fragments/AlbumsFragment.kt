@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.FragmentAlbumsBinding
@@ -14,7 +15,7 @@ import com.example.musicalbumsapp.ui.MainActivity
 import com.example.musicalbumsapp.ui.adapters.AlbumsAdapter
 import kotlinx.coroutines.launch
 
-class AlbumsFragment: Fragment(R.layout.fragment_albums) {
+class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private var binding: FragmentAlbumsBinding? = null
     private lateinit var viewModel: AlbumsViewModel
     private lateinit var albumsAdapter: AlbumsAdapter
@@ -24,6 +25,13 @@ class AlbumsFragment: Fragment(R.layout.fragment_albums) {
         binding = FragmentAlbumsBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
+
+        albumsAdapter.setOnItemClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("AlbumItem", it)
+            findNavController().navigate(R.id.action_albumsFragment_to_detailedFragment, bundle)
+        }
+
         viewModel.albumsResponse.observe(viewLifecycleOwner, Observer { response ->
             albumsAdapter.differ.submitList(response.results)
         })

@@ -3,14 +3,11 @@ package com.example.musicalbumsapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.ActivityMainBinding
+import com.example.musicalbumsapp.ui.viewmodels.AlbumsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

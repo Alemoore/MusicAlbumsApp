@@ -65,4 +65,17 @@
         app:layout_constraintLeft_toRightOf="@id/ivAlbumArtwork"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentTracksContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:name="com.example.musicalbumsapp.ui.fragments.TracksFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivAlbumArtwork">
+
+    </androidx.fragment.app.FragmentContainerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

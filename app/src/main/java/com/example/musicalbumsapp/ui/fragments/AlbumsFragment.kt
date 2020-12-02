@@ -1,19 +1,16 @@
 package com.example.musicalbumsapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.FragmentAlbumsBinding
-import com.example.musicalbumsapp.ui.AlbumsViewModel
+import com.example.musicalbumsapp.ui.viewmodels.AlbumsViewModel
 import com.example.musicalbumsapp.ui.MainActivity
 import com.example.musicalbumsapp.ui.adapters.AlbumsAdapter
-import kotlinx.coroutines.launch
 
 class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private var binding: FragmentAlbumsBinding? = null

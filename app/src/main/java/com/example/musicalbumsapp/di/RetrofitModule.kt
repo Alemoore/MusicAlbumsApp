@@ -1,6 +1,7 @@
 package com.example.musicalbumsapp.di
 
 import com.example.musicalbumsapp.api.AlbumsAPIService
+import com.example.musicalbumsapp.api.TracksAPIService
 import com.example.musicalbumsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,11 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideNewsApiService(retrofit: Retrofit): AlbumsAPIService = retrofit.create(AlbumsAPIService::class.java)
+    fun provideAlbumsApiService(retrofit: Retrofit): AlbumsAPIService = retrofit.create(AlbumsAPIService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTracksApiService(retrofit: Retrofit): TracksAPIService = retrofit.create(TracksAPIService::class.java)
 
     @Provides
     @Singleton

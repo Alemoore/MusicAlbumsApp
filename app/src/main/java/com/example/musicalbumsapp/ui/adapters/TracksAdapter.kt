@@ -1,35 +1,46 @@
 package com.example.musicalbumsapp.ui.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicalbumsapp.databinding.FragmentTracksBinding
+import com.example.musicalbumsapp.databinding.FragmentTrackHolderBinding
 import com.example.musicalbumsapp.models.TrackItem
 
-class TracksAdapter: RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
+class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
-        TODO("Not yet implemented")
+        val binding = FragmentTrackHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TracksViewHolder((binding))
     }
 
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val trackItem = differ.currentList[position]
+        holder.bind(trackItem)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = differ.currentList.size
 
-    val differCallback = object : DiffUtil.ItemCallback<TrackItem>() {
+
+    private val differCallback = object : DiffUtil.ItemCallback<TrackItem>() {
         override fun areItemsTheSame(oldItem: TrackItem, newItem: TrackItem): Boolean {
-            TODO("Not yet implemented")
+            return oldItem.trackId == newItem.trackId && oldItem.trackName == newItem.trackName
         }
 
         override fun areContentsTheSame(oldItem: TrackItem, newItem: TrackItem): Boolean {
-            TODO("Not yet implemented")
+            return oldItem == newItem
         }
-
     }
 
-    inner class TracksViewHolder(binding: FragmentTracksBinding): RecyclerView.ViewHolder(binding.root)
+    val differ = AsyncListDiffer(this, differCallback)
+
+    inner class TracksViewHolder(private val binding: FragmentTrackHolderBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(trackItem: TrackItem) {
+            binding.apply {
+                trackArtistName.text = trackItem.artistName
+                trackName.text = trackItem.trackName
+            }
+        }
+    }
 }

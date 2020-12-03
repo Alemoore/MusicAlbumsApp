@@ -2,6 +2,8 @@ package com.example.musicalbumsapp.ui.viewmodels
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.musicalbumsapp.models.TracksResponse
@@ -14,7 +16,11 @@ class TracksViewModel @ViewModelInject constructor(
         private val repository: TracksRepository
 ) : ViewModel() {
 
-    private fun getTracksByCollectionName() {
+    private val _tracksResponse = MutableLiveData<TracksResponse>()
+    val tracksResponse: LiveData<TracksResponse> = _tracksResponse
+
+
+    fun getTracksByCollectionName() {
         viewModelScope.launch {
             val response = repository.getTracksByCollectionName()
             handleTracksResponse(response)
@@ -23,8 +29,8 @@ class TracksViewModel @ViewModelInject constructor(
 
     private fun handleTracksResponse(response: Response<TracksResponse>) {
         if (response.isSuccessful)
-            Log.d("ViewModel", response.body().toString())
+            _tracksResponse.postValue(response.body())
         else
-            Log.d("ViewModel", response.message())
+            Log.d("TracksViewModel", response.message())
     }
 }

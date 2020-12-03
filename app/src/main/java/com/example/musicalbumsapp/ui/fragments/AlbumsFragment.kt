@@ -14,13 +14,13 @@ import com.example.musicalbumsapp.ui.adapters.AlbumsAdapter
 
 class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private var binding: FragmentAlbumsBinding? = null
-    private lateinit var viewModel: AlbumsViewModel
+    private lateinit var albumsViewModel: AlbumsViewModel
     private lateinit var albumsAdapter: AlbumsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAlbumsBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
+        albumsViewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
 
         albumsAdapter.setOnItemClickListener {
@@ -29,7 +29,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
             findNavController().navigate(R.id.action_albumsFragment_to_detailedFragment, bundle)
         }
 
-        viewModel.albumsResponse.observe(viewLifecycleOwner, Observer { response ->
+        albumsViewModel.albumsResponse.observe(viewLifecycleOwner, Observer { response ->
             albumsAdapter.differ.submitList(response.results)
         })
     }

@@ -35,7 +35,7 @@ class AlbumsViewModel @ViewModelInject constructor(
         if (response.isSuccessful) {
             _albumsResponse.postValue(response.body())
         } else {
-            Log.d("ViewModel", response.message())
+            Log.d("AlbumsViewModel", response.message())
         }
     }
 }

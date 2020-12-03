@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/albumsFragment">
+    app:startDestination="@id/searchFragment">
     <fragment
         android:id="@+id/albumsFragment"
         android:name="com.example.musicalbumsapp.ui.fragments.AlbumsFragment"
         android:label="AlbumsFragment" >
         <action
             android:id="@+id/action_albumsFragment_to_detailedFragment"
-            app:destination="@id/detailedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.example.musicalbumsapp.ui.fragments.FavoritesFragment"
-        android:label="FavoritesFragment" >
-        <action
-            android:id="@+id/action_favoritesFragment_to_detailedFragment"
             app:destination="@id/detailedFragment" />
     </fragment>
     <fragment
@@ -31,7 +23,7 @@
         android:name="com.example.musicalbumsapp.ui.fragments.SearchFragment"
         android:label="SearchFragment" >
         <action
-            android:id="@+id/action_searchFragment_to_detailedFragment"
-            app:destination="@id/detailedFragment" />
+            android:id="@+id/action_searchFragment_to_albumsFragment"
+            app:destination="@id/albumsFragment" />
     </fragment>
 </navigation>

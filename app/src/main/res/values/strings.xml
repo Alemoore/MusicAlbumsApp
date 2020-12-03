@@ -4,4 +4,5 @@
     <string name="favorites_title">Favorites</string>
     <string name="search_title">Search</string>
     <string name="album_image_description">Album image</string>
+    <string name="search_query_hint">Search query</string>
 </resources>

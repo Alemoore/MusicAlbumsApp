@@ -17,6 +17,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private lateinit var albumsViewModel: AlbumsViewModel
     private lateinit var albumsAdapter: AlbumsAdapter
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAlbumsBinding.bind(view)

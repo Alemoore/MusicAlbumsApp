@@ -38,7 +38,6 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
     inner class TracksViewHolder(private val binding: FragmentTrackHolderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(trackItem: TrackItem) {
             binding.apply {
-                trackArtistName.text = trackItem.artistName
                 trackName.text = trackItem.trackName
             }
         }

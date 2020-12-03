@@ -19,13 +19,10 @@ class AlbumsViewModel @ViewModelInject constructor(
     private val _albumsResponse = MutableLiveData<AlbumsResponse>()
     val albumsResponse: LiveData<AlbumsResponse> = _albumsResponse
 
-    init {
-        getAllAlbums()
-    }
 
-    private fun getAllAlbums() {
+    fun searchAlbums(searchQuery: String) {
         viewModelScope.launch {
-            val response = repository.getAllAlbums()
+            val response = repository.searchAlbums(searchQuery)
             handleAlbumsResponse(response)
         }
     }

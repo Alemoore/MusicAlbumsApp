@@ -6,11 +6,6 @@
         android:title="@string/albums_title"/>
 
     <item
-        android:id="@+id/favoritesFragment"
-        android:icon="@drawable/ic_favorites"
-        android:title="@string/favorites_title"/>
-
-    <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
         android:title="@string/search_title"/>

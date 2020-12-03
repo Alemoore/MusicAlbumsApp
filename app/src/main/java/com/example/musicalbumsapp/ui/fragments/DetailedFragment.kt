@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.FragmentDetailedBinding
+import com.example.musicalbumsapp.models.AlbumItem
 import com.example.musicalbumsapp.ui.adapters.TracksAdapter
 import com.example.musicalbumsapp.ui.viewmodels.TracksViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,16 +26,22 @@ class DetailedFragment : Fragment(R.layout.fragment_detailed) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailedBinding.bind(view)
-        tracksViewModel.getTracksByCollectionName()
-        setupView()
+        val album = args.AlbumItem
+
+        //найти лучшую альтернативу пустым строкам
+        tracksViewModel.getTracksByCollectionName(
+                album.artistName ?: "",
+                album.collectionName ?: ""
+        )
+        setupView(album)
         setupRecyclerView()
         tracksViewModel.tracksResponse.observe(viewLifecycleOwner, Observer { response ->
             tracksAdapter.differ.submitList(response.results)
         })
     }
 
-    private fun setupView() {
-        val album = args.AlbumItem
+    private fun setupView(album: AlbumItem) {
+
         binding?.apply {
             Glide.with(binding!!.root)
                     .load(album.artworkUrl100)
@@ -43,7 +50,7 @@ class DetailedFragment : Fragment(R.layout.fragment_detailed) {
             tvArtistName.text = album.artistName
             tvAlbumTitle.text = album.collectionName
             tvGenre.text = album.primaryGenreName
-            tvCurrency.text = album.collectionPrice.toString()
+            tvCurrency.text = ("$" + album.collectionPrice.toString())
             tvDate.text = album.releaseDate
         }
     }

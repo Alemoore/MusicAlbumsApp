@@ -20,9 +20,9 @@ class TracksViewModel @ViewModelInject constructor(
     val tracksResponse: LiveData<TracksResponse> = _tracksResponse
 
 
-    fun getTracksByCollectionName() {
+    fun getTracksByCollectionName(artistName: String, albumName: String) {
         viewModelScope.launch {
-            val response = repository.getTracksByCollectionName()
+            val response = repository.getTracksByCollectionName(artistName, albumName)
             handleTracksResponse(response)
         }
     }

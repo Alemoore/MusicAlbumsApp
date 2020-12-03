@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.apply {
             setContentView(root)
-            bottomNavigationView.setupWithNavController(findNavController(R.id.albumsNavHostFragment))
         }
     }
 }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicalbumsapp.databinding.FragmentTrackHolderBinding
-import com.example.musicalbumsapp.models.TrackItem
+import com.example.musicalbumsapp.domain.models.TrackDomainModel
 
 class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
 
@@ -23,12 +23,12 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
     override fun getItemCount(): Int = differ.currentList.size
 
 
-    private val differCallback = object : DiffUtil.ItemCallback<TrackItem>() {
-        override fun areItemsTheSame(oldItem: TrackItem, newItem: TrackItem): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<TrackDomainModel>() {
+        override fun areItemsTheSame(oldItem: TrackDomainModel, newItem: TrackDomainModel): Boolean {
             return oldItem.trackId == newItem.trackId && oldItem.trackName == newItem.trackName
         }
 
-        override fun areContentsTheSame(oldItem: TrackItem, newItem: TrackItem): Boolean {
+        override fun areContentsTheSame(oldItem: TrackDomainModel, newItem: TrackDomainModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -36,7 +36,7 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     inner class TracksViewHolder(private val binding: FragmentTrackHolderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(trackItem: TrackItem) {
+        fun bind(trackItem: TrackDomainModel) {
             binding.apply {
                 trackName.text = trackItem.trackName
             }

@@ -15,8 +15,8 @@
         android:name="com.example.musicalbumsapp.ui.fragments.DetailedFragment"
         android:label="DetailedFragment" >
         <argument
-            android:name="AlbumItem"
-            app:argType="com.example.musicalbumsapp.models.AlbumItem" />
+            android:name="AlbumDomainModel"
+            app:argType="com.example.musicalbumsapp.domain.models.AlbumDomainModel" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

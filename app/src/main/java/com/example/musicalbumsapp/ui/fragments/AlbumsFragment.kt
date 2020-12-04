@@ -2,6 +2,7 @@ package com.example.musicalbumsapp.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import com.example.musicalbumsapp.databinding.FragmentAlbumsBinding
 import com.example.musicalbumsapp.ui.viewmodels.AlbumsViewModel
 import com.example.musicalbumsapp.ui.MainActivity
 import com.example.musicalbumsapp.ui.adapters.AlbumsAdapter
+import com.example.musicalbumsapp.util.Result
 
 class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private var binding: FragmentAlbumsBinding? = null
@@ -26,12 +28,24 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
 
         albumsAdapter.setOnItemClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("AlbumItem", it)
+            bundle.putParcelable("AlbumDomainModel", it)
             findNavController().navigate(R.id.action_albumsFragment_to_detailedFragment, bundle)
         }
 
         albumsViewModel.albumsResponse.observe(viewLifecycleOwner, Observer { response ->
-            albumsAdapter.differ.submitList(response.results)
+            when (response) {
+                is Result.Success -> {
+                    hideProgressBar()
+                    albumsAdapter.differ.submitList(response.data)
+                }
+                is Result.Error -> {
+                    hideProgressBar()
+                    Toast.makeText(activity, response.message, Toast.LENGTH_LONG).show()
+                }
+                is Result.Loading -> {
+                    showProgressBar()
+                }
+            }
         })
     }
 
@@ -46,6 +60,14 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun hideProgressBar() {
+        binding?.albumsProgressBar?.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressBar() {
+        binding?.albumsProgressBar?.visibility = View.VISIBLE
     }
 
 }

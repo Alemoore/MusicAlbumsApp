@@ -1,7 +1,6 @@
-package com.example.musicalbumsapp.api
+package com.example.musicalbumsapp.data.api
 
-import com.example.musicalbumsapp.models.TracksResponse
-import retrofit2.Response
+import com.example.musicalbumsapp.data.models.TracksResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +11,5 @@ interface TracksAPIService {
             @Query("media")media: String = "music",
             @Query("entity")entityType: String = "song",
             @Query("attribute")attribute: String = "albumTerm"
-    ): Response<TracksResponse>
+    ): TracksResponse
 }

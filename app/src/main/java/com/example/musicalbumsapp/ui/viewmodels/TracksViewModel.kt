@@ -1,36 +1,34 @@
 package com.example.musicalbumsapp.ui.viewmodels
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicalbumsapp.models.TracksResponse
-import com.example.musicalbumsapp.repository.AlbumsRepository
-import com.example.musicalbumsapp.repository.TracksRepository
+import com.example.musicalbumsapp.domain.models.TrackDomainModel
+import com.example.musicalbumsapp.domain.usecase.GetAlbumTracksUseCase
+import com.example.musicalbumsapp.util.Result
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class TracksViewModel @ViewModelInject constructor(
-        private val repository: TracksRepository
+        private val getAlbumTracksUseCase: GetAlbumTracksUseCase
 ) : ViewModel() {
 
-    private val _tracksResponse = MutableLiveData<TracksResponse>()
-    val tracksResponse: LiveData<TracksResponse> = _tracksResponse
+    private val _tracksResponse = MutableLiveData<Result<TrackDomainModel>>()
+    val tracksResponse: LiveData<Result<TrackDomainModel>> = _tracksResponse
 
 
-    fun getTracksByCollectionName(artistName: String, albumName: String) {
+    fun getTracksByCollectionName(artistId: Int, albumName: String) {
+        _tracksResponse.postValue(Result.Loading())
         viewModelScope.launch {
-            val response = repository.getTracksByCollectionName(artistName, albumName)
-            handleTracksResponse(response)
+            val response = getAlbumTracksUseCase.execute(artistId, albumName)
+            if (!response.data.isNullOrEmpty()) {
+                _tracksResponse.postValue(Result.Success(response.data))
+            } else {
+                _tracksResponse.postValue(Result.Error(message = "Result of search is empty"))
+            }
         }
     }
-
-    private fun handleTracksResponse(response: Response<TracksResponse>) {
-        if (response.isSuccessful)
-            _tracksResponse.postValue(response.body())
-        else
-            Log.d("TracksViewModel", response.message())
-    }
 }
+
+

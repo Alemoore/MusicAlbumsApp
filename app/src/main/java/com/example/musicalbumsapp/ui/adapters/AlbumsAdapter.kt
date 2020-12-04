@@ -1,21 +1,19 @@
 package com.example.musicalbumsapp.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.musicalbumsapp.R
 import com.example.musicalbumsapp.databinding.ItemAlbumPreviewBinding
-import com.example.musicalbumsapp.models.AlbumItem
+import com.example.musicalbumsapp.domain.models.AlbumDomainModel
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
 
-    private var onItemClickListener: ((AlbumItem) -> Unit)? = null
+    private var onItemClickListener: ((AlbumDomainModel) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: ((AlbumItem) -> Unit)) {
+    fun setOnItemClickListener(listener: ((AlbumDomainModel) -> Unit)) {
         onItemClickListener = listener
     }
 
@@ -38,12 +36,12 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    private val differCallback = object : DiffUtil.ItemCallback<AlbumItem>() {
-        override fun areItemsTheSame(oldItem: AlbumItem, newItem: AlbumItem): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<AlbumDomainModel>() {
+        override fun areItemsTheSame(oldItem: AlbumDomainModel, newItem: AlbumDomainModel): Boolean {
             return oldItem.collectionId == newItem.collectionId
         }
 
-        override fun areContentsTheSame(oldItem: AlbumItem, newItem: AlbumItem): Boolean {
+        override fun areContentsTheSame(oldItem: AlbumDomainModel, newItem: AlbumDomainModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -51,9 +49,9 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumsViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     inner class AlbumsViewHolder(private val binding: ItemAlbumPreviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(album: AlbumItem) {
+        fun bind(album: AlbumDomainModel) {
             Glide.with(binding.root)
-                    .load(album.artworkUrl100)
+                    .load(album.artworkUrl60)
                     .into(binding.albumPreviewImage)
         }
     }

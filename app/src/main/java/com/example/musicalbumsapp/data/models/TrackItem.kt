@@ -1,4 +1,6 @@
-package com.example.musicalbumsapp.models
+package com.example.musicalbumsapp.data.models
+
+import com.example.musicalbumsapp.domain.models.TrackDomainModel
 
 data class TrackItem(
     val artistId: Int?,
@@ -33,4 +35,25 @@ data class TrackItem(
     val trackTimeMillis: Int?,
     val trackViewUrl: String?,
     val wrapperType: String?
+)
+
+fun TrackItem.toDomainModel() = TrackDomainModel(
+        artistId = this.artistId ?: Int.MIN_VALUE,
+        artistName = this.artistName ?: "Unknown",
+        collectionId = this.collectionId ?: Int.MIN_VALUE,
+        collectionName = this.collectionName ?: "Unknown",
+        collectionPrice = this.collectionPrice ?: Double.MAX_VALUE,
+        trackId = this.trackId ?: Int.MAX_VALUE,
+        trackName = this.trackName ?: "Unknown",
+        trackNumber = this.trackNumber ?: Int.MAX_VALUE,
+        trackPrice = this.trackPrice ?: Double.MAX_VALUE,
+        trackTimeMinutes = "${this.trackTimeMillis
+                ?.times(1000)
+                    ?.times(60)} : ${this.trackTimeMillis
+                ?.times(1000)
+                ?.minus(this.trackTimeMillis
+                        .times(1000)
+                        .times(60))}"
+
+
 )

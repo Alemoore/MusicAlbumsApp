@@ -1,17 +1,15 @@
-package com.example.musicalbumsapp.di
+package com.example.musicalbumsapp.data
 
-import com.example.musicalbumsapp.api.AlbumsAPIService
-import com.example.musicalbumsapp.api.TracksAPIService
+import com.example.musicalbumsapp.data.api.AlbumsAPIService
+import com.example.musicalbumsapp.data.api.TracksAPIService
 import com.example.musicalbumsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 

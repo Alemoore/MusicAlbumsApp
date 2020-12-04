@@ -1,4 +1,4 @@
-package com.example.musicalbumsapp.models
+package com.example.musicalbumsapp.data.models
 
 data class TracksResponse(
     val resultCount: Int,

@@ -1,8 +1,6 @@
-package com.example.musicalbumsapp.api
+package com.example.musicalbumsapp.data.api
 
-import com.example.musicalbumsapp.models.AlbumsResponse
-import com.example.musicalbumsapp.models.TracksResponse
-import retrofit2.Response
+import com.example.musicalbumsapp.data.models.AlbumsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,5 +14,5 @@ interface AlbumsAPIService {
             @Query("entity") entityType: String = "album",
             @Query("attribute") attribute: String = "genreTerm",
             @Query("limit") limit: String = "20"
-    ): Response<AlbumsResponse>
+    ): AlbumsResponse
 }

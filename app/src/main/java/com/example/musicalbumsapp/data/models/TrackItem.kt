@@ -47,15 +47,6 @@ fun TrackItem.toDomainModel() = TrackDomainModel(
         trackId = this.trackId ?: Int.MAX_VALUE,
         trackName = this.trackName ?: "Unknown",
         trackNumber = this.trackNumber ?: Int.MAX_VALUE,
-        trackPrice = this.trackPrice ?: Double.MAX_VALUE,
-        //convert milliseconds to minutes
-        trackTimeMinutes = "${this.trackTimeMillis
-                ?.times(1000)
-                    ?.times(60)} : ${this.trackTimeMillis
-                ?.times(1000)
-                ?.minus(this.trackTimeMillis
-                        .times(1000)
-                        .times(60))}"
-
+        trackPrice = this.trackPrice ?: Double.MAX_VALUE
 
 )

@@ -11,5 +11,4 @@ data class TrackDomainModel(
         val trackName: String,
         val trackNumber: Int,
         val trackPrice: Double,
-        val trackTimeMinutes: String
 )

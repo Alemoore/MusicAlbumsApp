@@ -40,6 +40,7 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
         fun bind(trackItem: TrackDomainModel) {
             binding.apply {
                 trackName.text = trackItem.trackName
+                trackPrice.text = ("$" + trackItem.trackPrice)
             }
         }
     }

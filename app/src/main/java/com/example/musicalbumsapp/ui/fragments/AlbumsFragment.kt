@@ -16,6 +16,7 @@ import com.example.musicalbumsapp.util.Result
 
 class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     private var binding: FragmentAlbumsBinding? = null
+    //searchFragment and albumsFragment use single viewModel
     private lateinit var albumsViewModel: AlbumsViewModel
     private lateinit var albumsAdapter: AlbumsAdapter
 
@@ -32,6 +33,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
             findNavController().navigate(R.id.action_albumsFragment_to_detailedFragment, bundle)
         }
 
+        //observe state of api response and show it to user
         albumsViewModel.albumsResponse.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Result.Success -> {
@@ -49,6 +51,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
         })
     }
 
+    //set adapter and layout manager to recycler view
     private fun setupRecyclerView() {
         albumsAdapter = AlbumsAdapter()
         binding?.rvFoundAlbums?.apply {
@@ -57,6 +60,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
         }
     }
 
+    //nullify binding because of different lifecycle of view and fragment
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

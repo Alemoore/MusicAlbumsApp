@@ -1,5 +1,6 @@
 package com.example.musicalbumsapp.domain.models
 
+//Domain model if Album
 data class TrackDomainModel(
         val artistId: Int,
         val artistName: String,

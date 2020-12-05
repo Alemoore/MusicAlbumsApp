@@ -8,7 +8,6 @@ import retrofit2.http.Query
 interface AlbumsAPIService {
     @GET("search?")
     suspend fun searchAlbums(
-            //убрать поиск по умолчанию
             @Query("term") term: String = "Classic",
             @Query("media") media: String = "music",
             @Query("entity") entityType: String = "album",

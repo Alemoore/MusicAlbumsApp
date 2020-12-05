@@ -37,6 +37,7 @@ data class TrackItem(
     val wrapperType: String?
 )
 
+//map api response to domain model without null fields
 fun TrackItem.toDomainModel() = TrackDomainModel(
         artistId = this.artistId ?: Int.MIN_VALUE,
         artistName = this.artistName ?: "Unknown",
@@ -47,6 +48,7 @@ fun TrackItem.toDomainModel() = TrackDomainModel(
         trackName = this.trackName ?: "Unknown",
         trackNumber = this.trackNumber ?: Int.MAX_VALUE,
         trackPrice = this.trackPrice ?: Double.MAX_VALUE,
+        //convert milliseconds to minutes
         trackTimeMinutes = "${this.trackTimeMillis
                 ?.times(1000)
                     ?.times(60)} : ${this.trackTimeMillis

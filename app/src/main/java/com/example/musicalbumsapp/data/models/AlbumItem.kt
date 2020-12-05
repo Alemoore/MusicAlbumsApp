@@ -26,6 +26,7 @@ data class AlbumItem(
         val wrapperType: String?
 )
 
+//map api response to domain model without null fields
 fun AlbumItem.toDomainModel() = AlbumDomainModel(
         artistId = this.artistId ?: 0,
         artistName = this.artistName ?: "Unknown",

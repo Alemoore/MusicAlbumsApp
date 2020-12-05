@@ -9,6 +9,8 @@ import javax.inject.Inject
 class GetAlbumTracksUseCase @Inject constructor(
         private val tracksRepository: TracksRepository
 ) {
+    //get only relevant album tracks and sort them by their number
+    //handle exceptions
     suspend fun execute(artistId: Int, albumName: String): Result<TrackDomainModel> = try {
         val result = tracksRepository.getTracksByCollectionName(albumName = albumName)
                 .filter { it.artistId == artistId && it.collectionName == albumName}

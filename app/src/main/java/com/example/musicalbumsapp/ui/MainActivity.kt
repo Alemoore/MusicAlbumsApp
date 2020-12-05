@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    //viewModelFactory is not needed if you create viewModel in such way
     val viewModel: AlbumsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

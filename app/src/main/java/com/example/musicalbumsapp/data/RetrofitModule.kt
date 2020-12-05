@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+//all retrofit dependencies is provided here
 @Module
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {

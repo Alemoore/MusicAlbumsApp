@@ -3,6 +3,8 @@ package com.example.musicalbumsapp.domain.models
 import android.os.Parcel
 import android.os.Parcelable
 
+//Domain model if Album
+//It hate to be parcelable for using in SafeArgs of navigation component
 data class AlbumDomainModel(
         val artistId: Int,
         val artistName: String?,

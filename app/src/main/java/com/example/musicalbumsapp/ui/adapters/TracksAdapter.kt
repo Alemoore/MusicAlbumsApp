@@ -24,6 +24,7 @@ class TracksAdapter : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
 
 
     private val differCallback = object : DiffUtil.ItemCallback<TrackDomainModel>() {
+
         override fun areItemsTheSame(oldItem: TrackDomainModel, newItem: TrackDomainModel): Boolean {
             return oldItem.trackId == newItem.trackId && oldItem.trackName == newItem.trackName
         }
